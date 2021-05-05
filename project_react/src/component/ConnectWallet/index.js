@@ -3,10 +3,10 @@ import { useParams, useHistory } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 
-export default function ShowHistory() {
+export default function ShowStatistics() {
   return (
       <div>
-        Show history
+        Connect wallet
       </div>
   );
 }

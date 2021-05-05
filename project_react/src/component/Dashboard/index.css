@@ -1,0 +1,9 @@
+.nav_item {
+    padding-left: 100px;
+}
+
+.dropdown {
+    position: fixed;
+    right: 15px;
+    top: 15px;
+}
