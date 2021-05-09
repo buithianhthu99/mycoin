@@ -11,8 +11,8 @@ export default function ShowStatistics() {
         <Navbar.Brand style={{fontSize: 28, paddingLeft: 30}}>My coin</Navbar.Brand>
       </Navbar>
       <br />
-      <Row>
-        <Col style={{left: "20%"}}>
+      <Row style={{width: "70%"}}>
+        <Col style={{marginLeft: "20%"}}>
           <Card className="card_item">
             <Card.Img variant="top" src="https://i.pinimg.com/originals/f6/b0/9e/f6b09e1dbbfe0e6e3e15c40499d1d437.png" />
             <Card.Body>

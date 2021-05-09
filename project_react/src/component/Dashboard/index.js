@@ -1,10 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { useParams, useHistory } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css'
+import './index.css';
 import { Navbar, Nav, Dropdown } from 'react-bootstrap';
+import {SocketContext, socket} from '../../context/socket.js';
 
 export default function Dashboard() {
+  const socket = useContext(SocketContext);
+  const [message, setMessage] = useState(0);
+
+  const handle_get_message = useCallback((message) => {
+    setMessage(message);
+  }, []);
+
+  useEffect(()=>{
+    socket.emit("address", localStorage.getItem("address"));
+  })
+
   return (
     <>
       <Navbar bg="dark" variant="dark">

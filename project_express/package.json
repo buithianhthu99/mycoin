@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start_socket": "node ./routes/p2p.js",
+    "start_api": "node ./bin/www",
+    "start": "concurrently --kill-others \"npm run start_socket\" \"npm run start_api\""
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -14,6 +16,11 @@
     "express": "~4.16.1",
     "hbs": "^4.1.2",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1"
+    "mongodb": "^3.6.6",
+    "morgan": "~1.9.1",
+    "socket.io": "^4.0.2"
+  },
+  "devDependencies": {
+    "concurrently": "^6.1.0"
   }
 }
