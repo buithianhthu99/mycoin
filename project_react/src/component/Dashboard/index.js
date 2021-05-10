@@ -7,14 +7,36 @@ import {SocketContext, socket} from '../../context/socket.js';
 
 export default function Dashboard() {
   const socket = useContext(SocketContext);
-  const [message, setMessage] = useState(0);
+  const [data, setData] = useState({});
 
-  const handle_get_message = useCallback((message) => {
-    setMessage(message);
+  const handleData = useCallback((return_data) => {
+    setData(return_data);
+    fs.writeFile('my_data.txt', JSON.stringify(data));
   }, []);
+
+  const fs = require('browserify-fs');
 
   useEffect(()=>{
     socket.emit("address", localStorage.getItem("address"));
+
+    fs.readFile('mydata.txt', 'utf-8', function(err, data) {
+      if (err) {
+        const myObject = {
+          blockchain: [],
+          pendingTransaction: []
+        }
+        fs.writeFile('mydata.txt', JSON.stringify(myObject), function() {
+          fs.readFile('mydata.txt', 'utf-8', function(err, data) {
+            socket.emit("local_data", data);
+          });
+        });
+      }
+      else {
+        socket.emit("local_data", data);
+      }
+    });
+
+    socket.on("sync_data", (data) => handleData(JSON.parse(data)));
   })
 
   return (
@@ -34,6 +56,7 @@ export default function Dashboard() {
         </Nav>
       </Navbar>
       <br />
+      <p>{JSON.stringify(data)}</p>
     </>
   );
 }
