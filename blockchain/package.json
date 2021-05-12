@@ -1,0 +1,17 @@
+{
+  "name": "blockchain",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./src/p2p.js"
+  },
+  "dependencies": {
+    "crypto-js": "^4.0.0",
+    "elliptic": "^6.5.4",
+    "express": "~4.16.1",
+    "socket.io": "^4.0.2"
+  },
+  "devDependencies": {
+    "concurrently": "^6.1.0"
+  }
+}

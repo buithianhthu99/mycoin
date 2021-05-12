@@ -1,0 +1,18 @@
+.card_item {
+    left: 30%;
+}
+
+.alert-text {
+    font-style: italic;
+    color: red;
+}
+
+.button {
+    position: absolute;
+    right: 20px;
+}
+
+.card_image {
+    left: 20%;
+    position: relative;
+}
