@@ -53,6 +53,7 @@ server.on("connection", (socket) => {
 
         console.log(`Check blockchain valid: ${client_blockchain.isChainValid()}`)
         if (client_blockchain.isChainValid() && client_blockchain.chain.length > mycoin.chain.length) {
+            console.log(`Update network data from new connection local data`);
             mycoin.chain = client_blockchain.chain;
             mycoin.pendingTransactions = client_blockchain.pendingTransactions;
         }
@@ -66,6 +67,15 @@ server.on("connection", (socket) => {
 
         socket.emit("sync_data", return_object);        
     })
+
+    socket.on("getAmount", (data) => {
+        console.log("GET AMOUNT");
+        console.log(mycoin);
+        address = data["address"];
+        socketId = data["socketId"];
+        console.log(`Socket id: ${socketId}`);
+        socket.socket(socketId).emit("getAmount", mycoin.getBalanceOfAddress(address));
+    });
 
     // when socket disconnects, remove it from the list:
     socket.on("disconnect", () => {

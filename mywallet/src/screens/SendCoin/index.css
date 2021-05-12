@@ -1,0 +1,29 @@
+.nav_item {
+    padding-left: 100px;
+}
+
+.dropdown {
+    position: fixed;
+    right: 15px;
+    top: 15px;
+}
+
+.inputForm {
+    position: fixed;
+    width: 60%;
+    left: 300px;
+    top: 200px;
+}
+
+.center {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create_button {
+    position: fixed;
+    right: 315px;
+    top: 310px;
+}

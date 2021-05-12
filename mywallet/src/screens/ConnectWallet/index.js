@@ -49,7 +49,18 @@ export default function ConnectWallet() {
             <Button variant="primary" className="button" onClick={handleClick}>Access now</Button>
           </Card.Text>
         </Card.Body>
-      </Card> 
+      </Card>
+      <br></br>
+      <footer class="footer" style={{position: "relative", top: 150, paddingBottom: 20, textAlign: "center"}}>
+        <div>
+          <a href="https://coreui.io">CoreUI</a>
+          <span>&copy; 2020 creativeLabs.</span>
+        </div>
+        <div class="ml-auto">
+          <span>Powered by</span>
+          <a href="https://coreui.io">CoreUI</a>
+        </div>
+      </footer> 
     </>
   );
 }

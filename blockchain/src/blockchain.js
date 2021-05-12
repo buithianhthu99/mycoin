@@ -66,7 +66,7 @@ class Blockchain {
         }
       }
   
-      console.log('getBalanceOfAdrees: %s', balance);
+      console.log('getBalanceOfAddrees: %s', balance);
       return balance;
     }
   
