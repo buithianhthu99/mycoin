@@ -3,6 +3,8 @@ import { useHistory } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 import { Navbar, Card, Button } from 'react-bootstrap';
+import createWallet from '../../img/createWallet.png';
+
 const EC = require('elliptic').ec;
 const ec = new EC('secp256k1');
 
@@ -40,7 +42,7 @@ export default function CreateWallet() {
       </Navbar>
       <br />
       <Card className="card_item" style={{width: 650, height: 500}}>
-        <Card.Img className="card_image" variant="top" src="https://i.pinimg.com/originals/f6/b0/9e/f6b09e1dbbfe0e6e3e15c40499d1d437.png" style={{width: 400, height: 300}} />
+        <Card.Img className="card_image" variant="top" src={createWallet} style={{width: 400, height: 300}} />
         <Card.Body>
           <Card.Title>Private key</Card.Title>
           <Card.Text>
@@ -52,12 +54,12 @@ export default function CreateWallet() {
         </Card.Body>
       </Card> 
       <br></br>
-      <footer class="footer" style={{position: "relative", top: 150, paddingBottom: 20, textAlign: "center"}}>
+      <footer className="footer" style={{position: "relative", top: 150, paddingBottom: 20, textAlign: "center"}}>
         <div>
           <a href="https://coreui.io">CoreUI</a>
           <span>&copy; 2020 creativeLabs.</span>
         </div>
-        <div class="ml-auto">
+        <div className="ml-auto">
           <span>Powered by</span>
           <a href="https://coreui.io">CoreUI</a>
         </div>

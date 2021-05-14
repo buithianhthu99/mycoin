@@ -20,30 +20,14 @@ const toKey_4 = ec.keyFromPrivate('441f163f01b23e326631ff664b48e1ed597e238ada924
 const toAddress_4 = toKey_4.getPublic('hex');
 
 let mycoin = new Blockchain()
-const tx1 = new Transaction(myWalletAddress, toAddress_1, 100);
-tx1.signTransaction(myKey);
-mycoin.addTransaction(tx1);
+mycoin.pendingTransactions.push(new Transaction(null, toAddress_1, 100));
 
 console.log('\n Starting the miner...');
 mycoin.minePendingTransactions(myWalletAddress);
 
-const tx2 = new Transaction(myWalletAddress, toAddress_2, 150);
-tx2.signTransaction(myKey);
-mycoin.addTransaction(tx2);
-
-console.log('\n Starting the miner...');
-mycoin.minePendingTransactions(myWalletAddress);
-
-const tx3 = new Transaction(myWalletAddress, toAddress_3, 250);
-tx3.signTransaction(myKey);
-mycoin.addTransaction(tx3);
-
-console.log('\n Starting the miner...');
-mycoin.minePendingTransactions(myWalletAddress);
-
-const tx4 = new Transaction(myWalletAddress, toAddress_4, 100);
-tx4.signTransaction(myKey);
-mycoin.addTransaction(tx4);
+mycoin.pendingTransactions.push(new Transaction(null, toAddress_2, 150));
+mycoin.pendingTransactions.push(new Transaction(null, toAddress_3, 250));
+mycoin.pendingTransactions.push(new Transaction(null, toAddress_4, 100));
 
 console.log('\n Starting the miner...');
 mycoin.minePendingTransactions(myWalletAddress);

@@ -3,6 +3,8 @@ import { useParams, useHistory } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 import { Navbar, Row, Col, Card, Button } from 'react-bootstrap';
+import createWallet from '../../img/createWallet.png';
+import accessWallet from '../../img/accessWallet.png';
 
 export default function ShowStatistics() {
   return (
@@ -12,10 +14,10 @@ export default function ShowStatistics() {
       </Navbar>
       <br />
       <div>
-        <Row style={{width: "70%"}}>
-          <Col style={{marginLeft: "20%"}}>
+        <Row style={{width: "80%"}}>
+          <Col style={{marginLeft: "12%"}}>
             <Card className="card_item">
-              <Card.Img variant="top" src="https://i.pinimg.com/originals/f6/b0/9e/f6b09e1dbbfe0e6e3e15c40499d1d437.png" />
+              <Card.Img variant="top" src={createWallet} />
               <Card.Body>
                 <Card.Title>Create wallet</Card.Title>
                 <Card.Text>
@@ -27,7 +29,7 @@ export default function ShowStatistics() {
           </Col>
           <Col >
             <Card className="card_item">
-              <Card.Img variant="top" src="https://cdn.dribbble.com/users/2912503/screenshots/7153341/wallet.jpg" />
+              <Card.Img variant="top" src={accessWallet} />
               <Card.Body>
                 <Card.Title>Access My Wallet</Card.Title>
                 <Card.Text>
@@ -40,12 +42,12 @@ export default function ShowStatistics() {
         </Row>
       </div>
       <br></br>
-      <footer class="footer" style={{position: "relative", top: 100, textAlign: "center"}}>
+      <footer className="footer" style={{position: "relative", top: 150, paddingBottom: 20, textAlign: "center"}}>
         <div>
           <a href="https://coreui.io">CoreUI</a>
           <span>&copy; 2020 creativeLabs.</span>
         </div>
-        <div class="ml-auto">
+        <div className="ml-auto">
           <span>Powered by</span>
           <a href="https://coreui.io">CoreUI</a>
         </div>
