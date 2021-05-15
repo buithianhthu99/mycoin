@@ -18,16 +18,20 @@ class Blockchain {
     }
     
     minePendingTransactions(miningRewardAddress) {
-      const rewardTx = new Transaction(null, miningRewardAddress, this.miningReward);
-      this.pendingTransactions.push(rewardTx);
-  
-      const block = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
-      block.mineBlock(this.difficulty);
-  
-      console.log('Block successfully mined!');
-      this.chain.push(block);
-  
-      this.pendingTransactions = [];
+      if (this.pendingTransactions.length > 0) {
+        const rewardTx = new Transaction(null, miningRewardAddress, this.miningReward);
+        this.pendingTransactions.push(rewardTx);
+    
+        const block = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
+        block.mineBlock(this.difficulty);
+    
+        console.log('Block successfully mined!');
+        this.chain.push(block);
+    
+        this.pendingTransactions = [];
+
+        return true;
+      }
     }
     
     addTransaction(transaction) {
@@ -82,6 +86,26 @@ class Blockchain {
   
       console.log('get transactions for wallet count: %s', txs.length);
       return txs;
+    }
+
+    getAllTransactions() {
+      const txs = [];
+  
+      for (const block of this.chain) {
+        for (const tx of block.transactions) {
+          txs.push(tx);
+        }
+      }
+      return txs;
+    }
+
+    getAllBlocks() {
+      const blocks = [];
+  
+      for (const block of this.chain) {
+        blocks.push(block);
+      }
+      return blocks;
     }
   
     isChainValid() {

@@ -6,6 +6,9 @@ import SendCoin from './screens/SendCoin/index'
 import Dashboard from './screens/Dashboard/index'
 import Homepage from './screens/HomePage/index'
 import ConnectWallet from './screens/ConnectWallet/index'
+import Mine from './screens/Mine/index'
+import Block from './screens/Block/index'
+import Transaction from './screens/Transaction/index'
 import {SocketContext, socket} from './context/socket.js';
 
 export default function App() {
@@ -27,6 +30,15 @@ export default function App() {
           </Route>
           <Route exact path= "/create">
             <CreateWallet/>
+          </Route>
+          <Route exact path= "/mine">
+            <Mine/>
+          </Route>
+          <Route exact path= "/transaction/:id">
+            <Transaction/>
+          </Route>
+          <Route exact path= "/block/:id">
+            <Block/>
           </Route>
           <Route exact path= "/">
             <Homepage/>

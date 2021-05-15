@@ -3,6 +3,8 @@ const Blockchain = require("../src/blockchain");
 const Block = require("../src/block");
 const Transaction = require("../src/transaction");
 const fs = require('fs');
+const EC = require('elliptic').ec;
+const ec = new EC('secp256k1');
 
 /*
 Code use to get or create data
@@ -119,6 +121,7 @@ server.on("connection", (socket) => {
         client_blockchain.pendingTransactions = pendingtransaction
 
         console.log(`Check blockchain valid: ${client_blockchain.isChainValid()}`)
+        console.log(`Check if have longer length: ${client_blockchain.chain.length > mycoin.chain.length}`)
         if (client_blockchain.isChainValid() && client_blockchain.chain.length > mycoin.chain.length) {
             console.log(`Update network data from new connection local data`);
             mycoin.chain = client_blockchain.chain;
@@ -148,6 +151,63 @@ server.on("connection", (socket) => {
         socketId = data["socketId"];
         res = mycoin.getBalanceOfAddress(address);
         server.to(socketId).emit("getAmount", `${res}`);
+    });
+
+    socket.on("add_PT", (data) => {
+        fromAddress = data["fromAddress"];
+        toAddress = data["toAddress"];
+        amount = data["amount"];
+        myKey = ec.keyFromPrivate(data["privateKey"]);
+        const tx = new Transaction(fromAddress, toAddress, parseInt(amount));
+        tx.signTransaction(myKey);
+        mycoin.addTransaction(tx);
+
+        console.log("Add new oending transaction successfully");
+        return_object = {
+            blockchain: mycoin.chain,
+            pendingTransactions: mycoin.pendingTransactions
+        }
+
+        fs.writeFile(path, JSON.stringify(return_object), function (err) {
+            if (err) return console.log(err);
+          });
+
+        console.log(`Data: ${JSON.stringify(return_object)}`)
+
+        socket.emit("sync_data", return_object);        
+    })
+
+    socket.on("mine", (data) => {
+        const temp = new Blockchain();
+        temp.chain = mycoin.chain;
+        temp.pendingTransactions = mycoin.pendingTransactions;
+        // if mine success
+        if (temp.minePendingTransactions(data["address"])) {
+            mycoin.chain = temp.chain;
+            mycoin.pendingTransactions = temp.pendingTransactions;
+            server.to(data["socket_id"]).emit("mine_success", mycoin.miningReward);
+            
+            return_object = {
+                blockchain: mycoin.chain,
+                pendingTransactions: mycoin.pendingTransactions
+            }
+    
+            fs.writeFile(path, JSON.stringify(return_object), function (err) {
+                if (err) return console.log(err);
+              });
+    
+            console.log(`Data: ${JSON.stringify(return_object)}`)
+    
+            socket.emit("sync_data", return_object); 
+        }
+    })
+
+    socket.on("get_all_blocks", () => {
+        socket.emit("blocks", {result: mycoin.getAllBlocks()});
+    });
+
+    socket.on("get_all_transactions", () => {
+        socket.emit("transactions", {result: mycoin.getAllTransactions()});
     });
 
     socket.on("log_disconnect", () => {
