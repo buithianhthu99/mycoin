@@ -3,14 +3,14 @@ import { useParams, useHistory } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 import { Navbar, Nav, Button, Row, Col } from 'react-bootstrap';
-import { SocketContext } from '../../context/socket.js';
+import {SocketContext} from '../../context/socket.js';
 import { ArrowRightCircle } from 'react-bootstrap-icons'
 
 export default function Transaction() {
   let {id} = useParams();
   const socket = useContext(SocketContext);
   const history = useHistory();
-  const [block, setBlock] = useState({});
+  const [transaction, setTransaction] = useState({});
 
   const handleLogout = () => {
     console.log("Click on log out")
@@ -20,10 +20,10 @@ export default function Transaction() {
   };
 
   useEffect(()=>{
-    socket.emit("get_all_blocks")
-    socket.on("blocks", (data) => {
-      setBlock(data["result"][id-1]);
-      console.log(block);
+    socket.emit("get_my_transactions", localStorage.getItem("address"))
+    socket.on("transactions", (data) => {
+      setTransaction(data["result"][id-1]);
+      console.log(transaction);
     })
   },[])
 
@@ -53,25 +53,25 @@ export default function Transaction() {
         </Nav>
       </Navbar>
       <br />
-      <h3 style={{textAlign: 'center', marginTop: 30, marginBottom: 20}}>BLOCK DETAIL</h3>
+      <h3 style={{textAlign: 'center', marginTop: 30, marginBottom: 20}}>TRANSACTION DETAIL</h3>
       <Row style={{postition: "absolute", marginLeft: "10%", width: "90%"}}>
-        <Col xs lg="2" style={{fontWeight: "bold"}}>Timestamp</Col>
-        <Col>{dateTimeReviver(block["timestamp"])}</Col>        
+        <Col xs lg="1" style={{fontWeight: "bold"}}>Timestamp</Col>
+        <Col>{dateTimeReviver(transaction["timestamp"])}</Col>        
       </Row>
       <br></br>
       <Row style={{postition: "absolute", marginLeft: "10%", width: "90%"}}>
-        <Col xs lg="2" style={{fontWeight: "bold"}}>Previous hash</Col>
-        <Col>{block["previousHash"]}</Col>        
+        <Col xs lg="1" style={{fontWeight: "bold"}}>From</Col>
+        <Col>{transaction["fromAddress"] === null ? "Server" : transaction["fromAddress"]}</Col>        
       </Row>
       <br></br>
       <Row style={{postition: "absolute", marginLeft: "10%", width: "90%"}}>
-        <Col xs lg="2" style={{fontWeight: "bold"}}>Nonce</Col>
-        <Col>{block["nonce"]}</Col>        
+        <Col xs lg="1" style={{fontWeight: "bold"}}>To</Col>
+        <Col>{transaction["toAddress"]}</Col>        
       </Row>
       <br></br>
       <Row style={{postition: "absolute", marginLeft: "10%", width: "90%"}}>
-        <Col xs lg="2" style={{fontWeight: "bold"}}>Hash</Col>
-        <Col>{block["hash"]}</Col>        
+        <Col xs lg="1" style={{fontWeight: "bold"}}>Amount</Col>
+        <Col>{transaction["amount"]}</Col>        
       </Row>
       <br></br>
       <footer className="footer" style={{position: "relative", top: 280, paddingBottom: 20, textAlign: "center"}}>

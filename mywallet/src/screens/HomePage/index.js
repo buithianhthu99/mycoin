@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 import { Navbar, Row, Col, Card, Button } from 'react-bootstrap';

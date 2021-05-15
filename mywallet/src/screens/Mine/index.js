@@ -3,8 +3,8 @@ import { useHistory } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 import { Navbar, Nav, Button } from 'react-bootstrap';
-import {SocketContext, socket} from '../../context/socket.js';
-import { ArrowRightCircle     } from 'react-bootstrap-icons'
+import { SocketContext } from '../../context/socket.js';
+import { ArrowRightCircle } from 'react-bootstrap-icons'
 
 export default function ShowStatistics() {
   const socket = useContext(SocketContext);
@@ -36,6 +36,7 @@ export default function ShowStatistics() {
       setStateContent("Mining successfully");
       setShowSuccess(true);
       setButtonState(false);
+      setReward(data);
     })
   },[])
 

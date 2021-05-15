@@ -84,7 +84,7 @@ class Blockchain {
         }
       }
   
-      console.log('get transactions for wallet count: %s', txs.length);
+      // console.log('get transactions for wallet count: %s', txs.length);
       return txs;
     }
 

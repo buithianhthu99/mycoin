@@ -162,7 +162,7 @@ server.on("connection", (socket) => {
         tx.signTransaction(myKey);
         mycoin.addTransaction(tx);
 
-        console.log("Add new oending transaction successfully");
+        console.log("Add new pending transaction successfully");
         return_object = {
             blockchain: mycoin.chain,
             pendingTransactions: mycoin.pendingTransactions
@@ -208,6 +208,10 @@ server.on("connection", (socket) => {
 
     socket.on("get_all_transactions", () => {
         socket.emit("transactions", {result: mycoin.getAllTransactions()});
+    });
+
+    socket.on("get_my_transactions", (data) => {
+        socket.emit("transactions", {result: mycoin.getAllTransactionsForWallet(data)});
     });
 
     socket.on("log_disconnect", () => {

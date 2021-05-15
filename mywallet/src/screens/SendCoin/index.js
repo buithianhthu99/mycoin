@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 import { Navbar, Modal, Button, Form, Row, Col, Nav, Alert  } from 'react-bootstrap';
-import {SocketContext, socket} from '../../context/socket.js';
-import { ArrowRightCircle  } from 'react-bootstrap-icons'
+import { SocketContext } from '../../context/socket.js';
+import { ArrowRightCircle } from 'react-bootstrap-icons'
 
 export default function SendCoin() {
   const [show, setShow] = useState(false);
@@ -23,16 +23,16 @@ export default function SendCoin() {
   };
 
   const checkValidForm = () => {
-    if ((toAddress != "") && (amount != "") && (parseInt(amount) <= localStorage.getItem("balance"))) {
+    if ((toAddress !== "") && (amount !== "") && (parseInt(amount) <= localStorage.getItem("balance"))) {
       console.log("Form valid")
       return true;
     }
     else {
-      if (toAddress == "") {
+      if (toAddress === "") {
         setAlertContent("To address field empty");
       }
       else {
-        if (amount == "") {
+        if (amount === "") {
           setAlertContent("Amount field empty");
         }
         else {

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
-import { Navbar, Card, Button, Form, Alert } from 'react-bootstrap';
+import { Navbar, Card, Button, Form } from 'react-bootstrap';
 import accessWallet from '../../img/accessWallet.png';
 
 const EC = require('elliptic').ec;

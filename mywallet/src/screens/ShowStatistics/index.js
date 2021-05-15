@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams, useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
-import { Navbar, Nav, Button, Row, Col, Table } from 'react-bootstrap';
-import {SocketContext, socket} from '../../context/socket.js';
-import { ArrowRightCircle     } from 'react-bootstrap-icons'
+import { Navbar, Nav, Button, Row, Col } from 'react-bootstrap';
+import { SocketContext } from '../../context/socket.js';
+import { ArrowRightCircle } from 'react-bootstrap-icons'
 
 export default function ShowStatistics() {
   const socket = useContext(SocketContext);
