@@ -9,5 +9,8 @@ npm start
 *Ví cần được chạy trên máy cùng mạng LAN với máy chạy blockchain*
 cd mywallet
 npm install
+cd backend
+npm install
+cd ..
 npm start
  Giao diện ví chạy tại http://localhost:3002/
